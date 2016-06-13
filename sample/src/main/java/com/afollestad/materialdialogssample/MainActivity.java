@@ -51,7 +51,7 @@ import butterknife.OnClick;
  * @author Aidan Follestad (afollestad)
  */
 public class MainActivity extends AppCompatActivity implements
-        FolderChooserDialog.FolderCallback, FileChooserDialog.FileCallback, ColorChooserDialog.ColorCallback {
+    FolderChooserDialog.FolderCallback, FileChooserDialog.FileCallback, ColorChooserDialog.ColorCallback {
 
     // custom view dialog
     private EditText passwordInput;
@@ -80,8 +80,9 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void startThread(Runnable run) {
-        if (mThread != null)
+        if (mThread != null) {
             mThread.interrupt();
+        }
         mThread = new Thread(run);
         mThread.start();
     }
@@ -113,313 +114,315 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     protected void onPause() {
         super.onPause();
-        if (mThread != null && !mThread.isInterrupted() && mThread.isAlive())
+        if (mThread != null && !mThread.isInterrupted() && mThread.isAlive()) {
             mThread.interrupt();
+        }
     }
 
     @OnClick(R.id.basicNoTitle)
     public void showBasicNoTitle() {
         new MaterialDialog.Builder(this)
-                .content(R.string.shareLocationPrompt)
-                .positiveText(R.string.agree)
-                .negativeText(R.string.disagree)
-                .show();
+            .content(R.string.shareLocationPrompt)
+            .positiveText(R.string.agree)
+            .negativeText(R.string.disagree)
+            .show();
     }
 
     @OnClick(R.id.basic)
     public void showBasic() {
         new MaterialDialog.Builder(this)
-                .title(R.string.useGoogleLocationServices)
-                .content(R.string.useGoogleLocationServicesPrompt)
-                .positiveText(R.string.agree)
-                .negativeText(R.string.disagree)
-                .show();
+            .title(R.string.useGoogleLocationServices)
+            .content(R.string.useGoogleLocationServicesPrompt)
+            .positiveText(R.string.agree)
+            .negativeText(R.string.disagree)
+            .show();
     }
 
     @OnClick(R.id.basicLongContent)
     public void showBasicLongContent() {
         new MaterialDialog.Builder(this)
-                .title(R.string.useGoogleLocationServices)
-                .content(R.string.loremIpsum)
-                .positiveText(R.string.agree)
-                .negativeText(R.string.disagree)
-                .show();
+            .title(R.string.useGoogleLocationServices)
+            .content(R.string.loremIpsum)
+            .positiveText(R.string.agree)
+            .negativeText(R.string.disagree)
+            .show();
     }
 
     @OnClick(R.id.basicIcon)
     public void showBasicIcon() {
         new MaterialDialog.Builder(this)
-                .iconRes(R.drawable.ic_launcher)
-                .limitIconToDefaultSize() // limits the displayed icon size to 48dp
-                .title(R.string.useGoogleLocationServices)
-                .content(R.string.useGoogleLocationServicesPrompt)
-                .positiveText(R.string.agree)
-                .negativeText(R.string.disagree)
-                .show();
+            .iconRes(R.drawable.ic_launcher)
+            .limitIconToDefaultSize() // limits the displayed icon size to 48dp
+            .title(R.string.useGoogleLocationServices)
+            .content(R.string.useGoogleLocationServicesPrompt)
+            .positiveText(R.string.agree)
+            .negativeText(R.string.disagree)
+            .show();
     }
 
     @OnClick(R.id.stacked)
     public void showStacked() {
         new MaterialDialog.Builder(this)
-                .title(R.string.useGoogleLocationServices)
-                .content(R.string.useGoogleLocationServicesPrompt)
-                .positiveText(R.string.speedBoost)
-                .negativeText(R.string.noThanks)
-                .btnStackedGravity(GravityEnum.END)
-                .forceStacking(true)  // this generally should not be forced, but is used for demo purposes
-                .show();
+            .title(R.string.useGoogleLocationServices)
+            .content(R.string.useGoogleLocationServicesPrompt)
+            .positiveText(R.string.speedBoost)
+            .negativeText(R.string.noThanks)
+            .btnStackedGravity(GravityEnum.END)
+            .forceStacking(true)  // this generally should not be forced, but is used for demo purposes
+            .show();
     }
 
     @OnClick(R.id.neutral)
     public void showNeutral() {
         new MaterialDialog.Builder(this)
-                .title(R.string.useGoogleLocationServices)
-                .content(R.string.useGoogleLocationServicesPrompt)
-                .positiveText(R.string.agree)
-                .negativeText(R.string.disagree)
-                .neutralText(R.string.more_info)
-                .show();
+            .title(R.string.useGoogleLocationServices)
+            .content(R.string.useGoogleLocationServicesPrompt)
+            .positiveText(R.string.agree)
+            .negativeText(R.string.disagree)
+            .neutralText(R.string.more_info)
+            .show();
     }
 
     @OnClick(R.id.callbacks)
     public void showCallbacks() {
         new MaterialDialog.Builder(this)
-                .title(R.string.useGoogleLocationServices)
-                .content(R.string.useGoogleLocationServicesPrompt)
-                .positiveText(R.string.agree)
-                .negativeText(R.string.disagree)
-                .neutralText(R.string.more_info)
-                .onAny(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        showToast(which.name() + "!");
-                    }
-                })
-                .show();
+            .title(R.string.useGoogleLocationServices)
+            .content(R.string.useGoogleLocationServicesPrompt)
+            .positiveText(R.string.agree)
+            .negativeText(R.string.disagree)
+            .neutralText(R.string.more_info)
+            .onAny(new MaterialDialog.SingleButtonCallback() {
+                @Override
+                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    showToast(which.name() + "!");
+                }
+            })
+            .show();
     }
 
     @OnClick(R.id.list)
     public void showList() {
         new MaterialDialog.Builder(this)
-                .title(R.string.socialNetworks)
-                .items(R.array.socialNetworks)
-                .itemsCallback(new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                        showToast(which + ": " + text);
-                    }
-                })
-                .show();
+            .title(R.string.socialNetworks)
+            .items(R.array.socialNetworks)
+            .itemsCallback(new MaterialDialog.ListCallback() {
+                @Override
+                public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                    showToast(which + ": " + text);
+                }
+            })
+            .show();
     }
 
     @OnClick(R.id.listNoTitle)
     public void showListNoTitle() {
         new MaterialDialog.Builder(this)
-                .items(R.array.socialNetworks)
-                .itemsCallback(new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                        showToast(which + ": " + text);
-                    }
-                })
-                .show();
+            .items(R.array.socialNetworks)
+            .itemsCallback(new MaterialDialog.ListCallback() {
+                @Override
+                public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                    showToast(which + ": " + text);
+                }
+            })
+            .show();
     }
 
     @OnClick(R.id.longList)
     public void showLongList() {
         new MaterialDialog.Builder(this)
-                .title(R.string.states)
-                .items(R.array.states)
-                .itemsCallback(new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                        showToast(which + ": " + text);
-                    }
-                })
-                .positiveText(android.R.string.cancel)
-                .show();
+            .title(R.string.states)
+            .items(R.array.states)
+            .itemsCallback(new MaterialDialog.ListCallback() {
+                @Override
+                public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                    showToast(which + ": " + text);
+                }
+            })
+            .positiveText(android.R.string.cancel)
+            .show();
     }
 
     @OnClick(R.id.list_longItems)
     public void showListLongItems() {
         new MaterialDialog.Builder(this)
-                .title(R.string.socialNetworks)
-                .items(R.array.socialNetworks_longItems)
-                .itemsCallback(new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                        showToast(which + ": " + text);
-                    }
-                })
-                .show();
+            .title(R.string.socialNetworks)
+            .items(R.array.socialNetworks_longItems)
+            .itemsCallback(new MaterialDialog.ListCallback() {
+                @Override
+                public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                    showToast(which + ": " + text);
+                }
+            })
+            .show();
     }
 
     @OnClick(R.id.singleChoice)
     public void showSingleChoice() {
         new MaterialDialog.Builder(this)
-                .title(R.string.socialNetworks)
-                .items(R.array.socialNetworks)
-                .itemsCallbackSingleChoice(2, new MaterialDialog.ListCallbackSingleChoice() {
-                    @Override
-                    public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                        showToast(which + ": " + text);
-                        return true; // allow selection
-                    }
-                })
-                .positiveText(R.string.md_choose_label)
-                .show();
+            .title(R.string.socialNetworks)
+            .items(R.array.socialNetworks)
+            .itemsCallbackSingleChoice(2, new MaterialDialog.ListCallbackSingleChoice() {
+                @Override
+                public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                    showToast(which + ": " + text);
+                    return true; // allow selection
+                }
+            })
+            .positiveText(R.string.md_choose_label)
+            .show();
     }
 
     @OnClick(R.id.singleChoice_longItems)
     public void showSingleChoiceLongItems() {
         new MaterialDialog.Builder(this)
-                .title(R.string.socialNetworks)
-                .items(R.array.socialNetworks_longItems)
-                .itemsCallbackSingleChoice(2, new MaterialDialog.ListCallbackSingleChoice() {
-                    @Override
-                    public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                        showToast(which + ": " + text);
-                        return true; // allow selection
-                    }
-                })
-                .positiveText(R.string.md_choose_label)
-                .show();
+            .title(R.string.socialNetworks)
+            .items(R.array.socialNetworks_longItems)
+            .itemsCallbackSingleChoice(2, new MaterialDialog.ListCallbackSingleChoice() {
+                @Override
+                public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                    showToast(which + ": " + text);
+                    return true; // allow selection
+                }
+            })
+            .positiveText(R.string.md_choose_label)
+            .show();
     }
 
     @OnClick(R.id.multiChoice)
     public void showMultiChoice() {
         new MaterialDialog.Builder(this)
-                .title(R.string.socialNetworks)
-                .items(R.array.socialNetworks)
-                .itemsCallbackMultiChoice(new Integer[]{1, 3}, new MaterialDialog.ListCallbackMultiChoice() {
-                    @Override
-                    public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
-                        StringBuilder str = new StringBuilder();
-                        for (int i = 0; i < which.length; i++) {
-                            if (i > 0) str.append('\n');
-                            str.append(which[i]);
-                            str.append(": ");
-                            str.append(text[i]);
-                        }
-                        showToast(str.toString());
-                        return true; // allow selection
+            .title(R.string.socialNetworks)
+            .items(R.array.socialNetworks)
+            .itemsCallbackMultiChoice(new Integer[] { 1, 3 }, new MaterialDialog.ListCallbackMultiChoice() {
+                @Override
+                public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
+                    StringBuilder str = new StringBuilder();
+                    for (int i = 0; i < which.length; i++) {
+                        if (i > 0) str.append('\n');
+                        str.append(which[i]);
+                        str.append(": ");
+                        str.append(text[i]);
                     }
-                })
-                .onNeutral(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        dialog.clearSelectedIndices();
-                    }
-                })
-                .alwaysCallMultiChoiceCallback()
-                .positiveText(R.string.md_choose_label)
-                .autoDismiss(false)
-                .neutralText(R.string.clear_selection)
-                .show();
+                    showToast(str.toString());
+                    return true; // allow selection
+                }
+            })
+            .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                @Override
+                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    dialog.clearSelectedIndices();
+                }
+            })
+            .alwaysCallMultiChoiceCallback()
+            .positiveText(R.string.md_choose_label)
+            .autoDismiss(false)
+            .neutralText(R.string.clear_selection)
+            .show();
     }
 
     @OnClick(R.id.multiChoiceLimited)
     public void showMultiChoiceLimited() {
         new MaterialDialog.Builder(this)
-                .title(R.string.socialNetworks)
-                .items(R.array.socialNetworks)
-                .itemsCallbackMultiChoice(new Integer[]{1}, new MaterialDialog.ListCallbackMultiChoice() {
-                    @Override
-                    public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
-                        boolean allowSelection = which.length <= 2; // limit selection to 2, the new selection is included in the which array
-                        if (!allowSelection) {
-                            showToast(R.string.selection_limit_reached);
-                        }
-                        return allowSelection;
+            .title(R.string.socialNetworks)
+            .items(R.array.socialNetworks)
+            .itemsCallbackMultiChoice(new Integer[] { 1 }, new MaterialDialog.ListCallbackMultiChoice() {
+                @Override
+                public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
+                    boolean allowSelection =
+                        which.length <= 2; // limit selection to 2, the new selection is included in the which array
+                    if (!allowSelection) {
+                        showToast(R.string.selection_limit_reached);
                     }
-                })
-                .positiveText(R.string.dismiss)
-                .alwaysCallMultiChoiceCallback() // the callback will always be called, to check if selection is still allowed
-                .show();
+                    return allowSelection;
+                }
+            })
+            .positiveText(R.string.dismiss)
+            .alwaysCallMultiChoiceCallback() // the callback will always be called, to check if selection is still allowed
+            .show();
     }
 
     @OnClick(R.id.multiChoice_longItems)
     public void showMultiChoiceLongItems() {
         new MaterialDialog.Builder(this)
-                .title(R.string.socialNetworks)
-                .items(R.array.socialNetworks_longItems)
-                .itemsCallbackMultiChoice(new Integer[]{1, 3}, new MaterialDialog.ListCallbackMultiChoice() {
-                    @Override
-                    public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
-                        StringBuilder str = new StringBuilder();
-                        for (int i = 0; i < which.length; i++) {
-                            if (i > 0) str.append('\n');
-                            str.append(which[i]);
-                            str.append(": ");
-                            str.append(text[i]);
-                        }
-                        showToast(str.toString());
-                        return true; // allow selection
+            .title(R.string.socialNetworks)
+            .items(R.array.socialNetworks_longItems)
+            .itemsCallbackMultiChoice(new Integer[] { 1, 3 }, new MaterialDialog.ListCallbackMultiChoice() {
+                @Override
+                public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
+                    StringBuilder str = new StringBuilder();
+                    for (int i = 0; i < which.length; i++) {
+                        if (i > 0) str.append('\n');
+                        str.append(which[i]);
+                        str.append(": ");
+                        str.append(text[i]);
                     }
-                })
-                .positiveText(R.string.md_choose_label)
-                .show();
+                    showToast(str.toString());
+                    return true; // allow selection
+                }
+            })
+            .positiveText(R.string.md_choose_label)
+            .show();
     }
 
     @OnClick(R.id.simpleList)
     public void showSimpleList() {
         final MaterialSimpleListAdapter adapter = new MaterialSimpleListAdapter(this);
         adapter.add(new MaterialSimpleListItem.Builder(this)
-                .content("username@gmail.com")
-                .icon(R.drawable.ic_account_circle)
-                .backgroundColor(Color.WHITE)
-                .build());
+            .content("username@gmail.com")
+            .icon(R.drawable.ic_account_circle)
+            .backgroundColor(Color.WHITE)
+            .build());
         adapter.add(new MaterialSimpleListItem.Builder(this)
-                .content("user02@gmail.com")
-                .icon(R.drawable.ic_account_circle)
-                .backgroundColor(Color.WHITE)
-                .build());
+            .content("user02@gmail.com")
+            .icon(R.drawable.ic_account_circle)
+            .backgroundColor(Color.WHITE)
+            .build());
         adapter.add(new MaterialSimpleListItem.Builder(this)
-                .content(R.string.add_account)
-                .icon(R.drawable.ic_content_add)
-                .iconPaddingDp(8)
-                .build());
+            .content(R.string.add_account)
+            .icon(R.drawable.ic_content_add)
+            .iconPaddingDp(8)
+            .build());
 
         new MaterialDialog.Builder(this)
-                .title(R.string.set_backup)
-                .adapter(adapter, new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
-                        MaterialSimpleListItem item = adapter.getItem(which);
-                        showToast(item.getContent().toString());
-                    }
-                })
-                .show();
+            .title(R.string.set_backup)
+            .adapter(adapter, new MaterialDialog.ListCallback() {
+                @Override
+                public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                    MaterialSimpleListItem item = adapter.getItem(which);
+                    showToast(item.getContent().toString());
+                }
+            })
+            .show();
     }
 
     @OnClick(R.id.customListItems)
     public void showCustomList() {
         new MaterialDialog.Builder(this)
-                .title(R.string.socialNetworks)
-                .adapter(new ButtonItemAdapter(this, R.array.socialNetworks),
-                        new MaterialDialog.ListCallback() {
-                            @Override
-                            public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
-                                showToast("Clicked item " + which);
-                            }
-                        })
-                .show();
+            .title(R.string.socialNetworks)
+            .adapter(new ButtonItemAdapter(this, R.array.socialNetworks),
+                new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                        showToast("Clicked item " + which);
+                    }
+                })
+            .show();
     }
 
     @SuppressWarnings("ResourceAsColor")
     @OnClick(R.id.customView)
     public void showCustomView() {
         MaterialDialog dialog = new MaterialDialog.Builder(this)
-                .title(R.string.googleWifi)
-                .customView(R.layout.dialog_customview, true)
-                .positiveText(R.string.connect)
-                .negativeText(android.R.string.cancel)
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        showToast("Password: " + passwordInput.getText().toString());
-                    }
-                }).build();
+            .title(R.string.googleWifi)
+            .customView(R.layout.dialog_customview, true)
+            .positiveText(R.string.connect)
+            .negativeText(android.R.string.cancel)
+            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                @Override
+                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    showToast("Password: " + passwordInput.getText().toString());
+                }
+            }).build();
 
         positiveAction = dialog.getActionButton(DialogAction.POSITIVE);
         //noinspection ConstantConditions
@@ -451,10 +454,10 @@ public class MainActivity extends AppCompatActivity implements
 
         int widgetColor = ThemeSingleton.get().widgetColor;
         MDTintHelper.setTint(checkbox,
-                widgetColor == 0 ? ContextCompat.getColor(this, R.color.material_teal_a400) : widgetColor);
+            widgetColor == 0 ? ContextCompat.getColor(this, R.color.material_teal_a400) : widgetColor);
 
         MDTintHelper.setTint(passwordInput,
-                widgetColor == 0 ? ContextCompat.getColor(this, R.color.material_teal_a400) : widgetColor);
+            widgetColor == 0 ? ContextCompat.getColor(this, R.color.material_teal_a400) : widgetColor);
 
         dialog.show();
         positiveAction.setEnabled(false); // disabled by default
@@ -463,54 +466,55 @@ public class MainActivity extends AppCompatActivity implements
     @OnClick(R.id.customView_webView)
     public void showCustomWebView() {
         int accentColor = ThemeSingleton.get().widgetColor;
-        if (accentColor == 0)
+        if (accentColor == 0) {
             accentColor = ContextCompat.getColor(this, R.color.material_teal_a400);
+        }
         ChangelogDialog.create(false, accentColor)
-                .show(getSupportFragmentManager(), "changelog");
+            .show(getSupportFragmentManager(), "changelog");
     }
 
     @OnClick(R.id.colorChooser_primary)
     public void showColorChooserPrimary() {
         new ColorChooserDialog.Builder(this, R.string.color_palette)
-                .titleSub(R.string.colors)
-                .preselect(primaryPreselect)
-                .show();
+            .titleSub(R.string.colors)
+            .preselect(primaryPreselect)
+            .show();
     }
 
     @OnClick(R.id.colorChooser_accent)
     public void showColorChooserAccent() {
         new ColorChooserDialog.Builder(this, R.string.color_palette)
-                .titleSub(R.string.colors)
-                .accentMode(true)
-                .preselect(accentPreselect)
-                .show();
+            .titleSub(R.string.colors)
+            .accentMode(true)
+            .preselect(accentPreselect)
+            .show();
     }
 
     @OnClick(R.id.colorChooser_customColors)
     public void showColorChooserCustomColors() {
-        int[][] subColors = new int[][]{
-                new int[]{Color.parseColor("#EF5350"), Color.parseColor("#F44336"), Color.parseColor("#E53935")},
-                new int[]{Color.parseColor("#EC407A"), Color.parseColor("#E91E63"), Color.parseColor("#D81B60")},
-                new int[]{Color.parseColor("#AB47BC"), Color.parseColor("#9C27B0"), Color.parseColor("#8E24AA")},
-                new int[]{Color.parseColor("#7E57C2"), Color.parseColor("#673AB7"), Color.parseColor("#5E35B1")},
-                new int[]{Color.parseColor("#5C6BC0"), Color.parseColor("#3F51B5"), Color.parseColor("#3949AB")},
-                new int[]{Color.parseColor("#42A5F5"), Color.parseColor("#2196F3"), Color.parseColor("#1E88E5")}
+        int[][] subColors = new int[][] {
+            new int[] { Color.parseColor("#EF5350"), Color.parseColor("#F44336"), Color.parseColor("#E53935") },
+            new int[] { Color.parseColor("#EC407A"), Color.parseColor("#E91E63"), Color.parseColor("#D81B60") },
+            new int[] { Color.parseColor("#AB47BC"), Color.parseColor("#9C27B0"), Color.parseColor("#8E24AA") },
+            new int[] { Color.parseColor("#7E57C2"), Color.parseColor("#673AB7"), Color.parseColor("#5E35B1") },
+            new int[] { Color.parseColor("#5C6BC0"), Color.parseColor("#3F51B5"), Color.parseColor("#3949AB") },
+            new int[] { Color.parseColor("#42A5F5"), Color.parseColor("#2196F3"), Color.parseColor("#1E88E5") }
         };
 
         new ColorChooserDialog.Builder(this, R.string.color_palette)
-                .titleSub(R.string.colors)
-                .preselect(primaryPreselect)
-                .customColors(R.array.custom_colors, subColors)
-                .show();
+            .titleSub(R.string.colors)
+            .preselect(primaryPreselect)
+            .customColors(R.array.custom_colors, subColors)
+            .show();
     }
 
     @OnClick(R.id.colorChooser_customColorsNoSub)
     public void showColorChooserCustomColorsNoSub() {
         new ColorChooserDialog.Builder(this, R.string.color_palette)
-                .titleSub(R.string.colors)
-                .preselect(primaryPreselect)
-                .customColors(R.array.custom_colors, null)
-                .show();
+            .titleSub(R.string.colors)
+            .preselect(primaryPreselect)
+            .customColors(R.array.custom_colors, null)
+            .show();
     }
 
     // Receives callback from color chooser dialog
@@ -524,8 +528,9 @@ public class MainActivity extends AppCompatActivity implements
             ThemeSingleton.get().widgetColor = color;
         } else {
             primaryPreselect = color;
-            if (getSupportActionBar() != null)
+            if (getSupportActionBar() != null) {
                 getSupportActionBar().setBackgroundDrawable(new ColorDrawable(color));
+            }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 getWindow().setStatusBarColor(CircleView.shiftColorDown(color));
                 getWindow().setNavigationBarColor(color);
@@ -536,51 +541,51 @@ public class MainActivity extends AppCompatActivity implements
     @OnClick(R.id.themed)
     public void showThemed() {
         new MaterialDialog.Builder(this)
-                .title(R.string.useGoogleLocationServices)
-                .content(R.string.useGoogleLocationServicesPrompt)
-                .positiveText(R.string.agree)
-                .negativeText(R.string.disagree)
-                .positiveColorRes(R.color.material_red_400)
-                .negativeColorRes(R.color.material_red_400)
-                .titleGravity(GravityEnum.CENTER)
-                .titleColorRes(R.color.material_red_400)
-                .contentColorRes(android.R.color.white)
-                .backgroundColorRes(R.color.material_blue_grey_800)
-                .dividerColorRes(R.color.material_teal_a400)
-                .btnSelector(R.drawable.md_btn_selector_custom, DialogAction.POSITIVE)
-                .positiveColor(Color.WHITE)
-                .negativeColorAttr(android.R.attr.textColorSecondaryInverse)
-                .theme(Theme.DARK)
-                .show();
+            .title(R.string.useGoogleLocationServices)
+            .content(R.string.useGoogleLocationServicesPrompt)
+            .positiveText(R.string.agree)
+            .negativeText(R.string.disagree)
+            .positiveColorRes(R.color.material_red_400)
+            .negativeColorRes(R.color.material_red_400)
+            .titleGravity(GravityEnum.CENTER)
+            .titleColorRes(R.color.material_red_400)
+            .contentColorRes(android.R.color.white)
+            .backgroundColorRes(R.color.material_blue_grey_800)
+            .dividerColorRes(R.color.material_teal_a400)
+            .btnSelector(R.drawable.md_btn_selector_custom, DialogAction.POSITIVE)
+            .positiveColor(Color.WHITE)
+            .negativeColorAttr(android.R.attr.textColorSecondaryInverse)
+            .theme(Theme.DARK)
+            .show();
     }
 
     @OnClick(R.id.showCancelDismiss)
     public void showShowCancelDismissCallbacks() {
         new MaterialDialog.Builder(this)
-                .title(R.string.useGoogleLocationServices)
-                .content(R.string.useGoogleLocationServicesPrompt)
-                .positiveText(R.string.agree)
-                .negativeText(R.string.disagree)
-                .neutralText(R.string.more_info)
-                .showListener(new DialogInterface.OnShowListener() {
-                    @Override
-                    public void onShow(DialogInterface dialog) {
-                        showToast("onShow");
-                    }
-                })
-                .cancelListener(new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        showToast("onCancel");
-                    }
-                })
-                .dismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        showToast("onDismiss");
-                    }
-                })
-                .show();
+            .title(R.string.useGoogleLocationServices)
+            .content(R.string.useGoogleLocationServicesPrompt)
+            .positiveText(R.string.agree)
+            .negativeText(R.string.disagree)
+            .neutralText(R.string.more_info)
+            .showListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface dialog) {
+                    showToast("onShow");
+                }
+            })
+            .cancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    showToast("onCancel");
+                }
+            })
+            .dismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    showToast("onDismiss");
+                }
+            })
+            .show();
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -588,12 +593,13 @@ public class MainActivity extends AppCompatActivity implements
     public void showFileChooser() {
         chooserDialog = R.id.file_chooser;
         if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) !=
-                PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_RC);
+            PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[] { Manifest.permission.READ_EXTERNAL_STORAGE },
+                STORAGE_PERMISSION_RC);
             return;
         }
         new FileChooserDialog.Builder(this)
-                .show();
+            .show();
     }
 
     @Override
@@ -606,13 +612,14 @@ public class MainActivity extends AppCompatActivity implements
     public void showFolderChooser() {
         chooserDialog = R.id.folder_chooser;
         if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) !=
-                PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_RC);
+            PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[] { Manifest.permission.READ_EXTERNAL_STORAGE },
+                STORAGE_PERMISSION_RC);
             return;
         }
         new FolderChooserDialog.Builder(MainActivity.this)
-                .chooseButton(R.string.md_choose_label)
-                .show();
+            .chooseButton(R.string.md_choose_label)
+            .show();
     }
 
     @Override
@@ -623,89 +630,118 @@ public class MainActivity extends AppCompatActivity implements
     @OnClick(R.id.input)
     public void showInputDialog() {
         new MaterialDialog.Builder(this)
-                .title(R.string.input)
-                .content(R.string.input_content)
-                .inputType(InputType.TYPE_CLASS_TEXT |
-                        InputType.TYPE_TEXT_VARIATION_PERSON_NAME |
-                        InputType.TYPE_TEXT_FLAG_CAP_WORDS)
-                .inputRange(2, 16)
-                .positiveText(R.string.submit)
-                .input(R.string.input_hint, R.string.input_hint, false, new MaterialDialog.InputCallback() {
-                    @Override
-                    public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
-                        showToast("Hello, " + input.toString() + "!");
+            .title(R.string.input)
+            .content(R.string.input_content)
+            .inputType(InputType.TYPE_CLASS_TEXT |
+                InputType.TYPE_TEXT_VARIATION_PERSON_NAME |
+                InputType.TYPE_TEXT_FLAG_CAP_WORDS)
+            .inputRange(2, 16)
+            .positiveText(R.string.submit)
+            .input(R.string.input_hint, R.string.input_hint, false, new MaterialDialog.InputCallback() {
+                @Override
+                public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+                    showToast("Hello, " + input.toString() + "!");
+                }
+            }).show();
+    }
+
+    @OnClick(R.id.input_error_show)
+    public void showInputDialogErrorShow() {
+        new MaterialDialog.Builder(this)
+            .title(R.string.input)
+            .content(R.string.input_content_error_check)
+            .inputType(InputType.TYPE_CLASS_TEXT |
+                InputType.TYPE_TEXT_VARIATION_PERSON_NAME |
+                InputType.TYPE_TEXT_FLAG_CAP_WORDS)
+            .positiveText(R.string.submit)
+            .validate(R.string.input_content_error, 0, R.string.input_content_error_regexp)
+            .input(R.string.input_hint, 0, false, new MaterialDialog.InputCallback() {
+                @Override
+                public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+                    if (input.toString().equalsIgnoreCase("hello")) {
+                        dialog.getActionButton(DialogAction.POSITIVE).setEnabled(false);
+                    } else {
+                        dialog.setContent(R.string.input_content_custominvalidation);
+                        dialog.getActionButton(DialogAction.POSITIVE).setEnabled(true);
                     }
-                }).show();
+                }
+            }).onPositive(new MaterialDialog.SingleButtonCallback() {
+            @Override
+            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
+            }
+        }).show();
     }
 
     @OnClick(R.id.input_custominvalidation)
     public void showInputDialogCustomInvalidation() {
         new MaterialDialog.Builder(this)
-                .title(R.string.input)
-                .content(R.string.input_content_custominvalidation)
-                .inputType(InputType.TYPE_CLASS_TEXT |
-                        InputType.TYPE_TEXT_VARIATION_PERSON_NAME |
-                        InputType.TYPE_TEXT_FLAG_CAP_WORDS)
-                .positiveText(R.string.submit)
-                .alwaysCallInputCallback() // this forces the callback to be invoked with every input change
-                .input(R.string.input_hint, 0, false, new MaterialDialog.InputCallback() {
-                    @Override
-                    public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
-                        if (input.toString().equalsIgnoreCase("hello")) {
-                            dialog.setContent("I told you not to type that!");
-                            dialog.getActionButton(DialogAction.POSITIVE).setEnabled(false);
-                        } else {
-                            dialog.setContent(R.string.input_content_custominvalidation);
-                            dialog.getActionButton(DialogAction.POSITIVE).setEnabled(true);
-                        }
+            .title(R.string.input)
+            .content(R.string.input_content_custominvalidation)
+            .inputType(InputType.TYPE_CLASS_TEXT |
+                InputType.TYPE_TEXT_VARIATION_PERSON_NAME |
+                InputType.TYPE_TEXT_FLAG_CAP_WORDS)
+            .positiveText(R.string.submit)
+            .alwaysCallInputCallback() // this forces the callback to be invoked with every input change
+            .input(R.string.input_hint, 0, false, new MaterialDialog.InputCallback() {
+                @Override
+                public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+                    if (input.toString().equalsIgnoreCase("hello")) {
+                        dialog.setContent("I told you not to type that!");
+                        dialog.getActionButton(DialogAction.POSITIVE).setEnabled(false);
+                    } else {
+                        dialog.setContent(R.string.input_content_custominvalidation);
+                        dialog.getActionButton(DialogAction.POSITIVE).setEnabled(true);
                     }
-                }).show();
+                }
+            }).show();
     }
 
     @OnClick(R.id.progress1)
     public void showProgressDeterminateDialog() {
         new MaterialDialog.Builder(this)
-                .title(R.string.progress_dialog)
-                .content(R.string.please_wait)
-                .contentGravity(GravityEnum.CENTER)
-                .progress(false, 150, true)
-                .cancelListener(new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        if (mThread != null)
-                            mThread.interrupt();
+            .title(R.string.progress_dialog)
+            .content(R.string.please_wait)
+            .contentGravity(GravityEnum.CENTER)
+            .progress(false, 150, true)
+            .cancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    if (mThread != null) {
+                        mThread.interrupt();
                     }
-                })
-                .showListener(new DialogInterface.OnShowListener() {
-                    @Override
-                    public void onShow(DialogInterface dialogInterface) {
-                        final MaterialDialog dialog = (MaterialDialog) dialogInterface;
-                        startThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                while (dialog.getCurrentProgress() != dialog.getMaxProgress() &&
-                                        !Thread.currentThread().isInterrupted()) {
-                                    if (dialog.isCancelled())
-                                        break;
-                                    try {
-                                        Thread.sleep(50);
-                                    } catch (InterruptedException e) {
-                                        break;
-                                    }
-                                    dialog.incrementProgress(1);
+                }
+            })
+            .showListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface dialogInterface) {
+                    final MaterialDialog dialog = (MaterialDialog) dialogInterface;
+                    startThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            while (dialog.getCurrentProgress() != dialog.getMaxProgress() &&
+                                !Thread.currentThread().isInterrupted()) {
+                                if (dialog.isCancelled()) {
+                                    break;
                                 }
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        mThread = null;
-                                        dialog.setContent(getString(R.string.md_done_label));
-                                    }
-                                });
-
+                                try {
+                                    Thread.sleep(50);
+                                } catch (InterruptedException e) {
+                                    break;
+                                }
+                                dialog.incrementProgress(1);
                             }
-                        });
-                    }
-                }).show();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mThread = null;
+                                    dialog.setContent(getString(R.string.md_done_label));
+                                }
+                            });
+                        }
+                    });
+                }
+            }).show();
     }
 
     @OnClick(R.id.progress2)
@@ -720,19 +756,20 @@ public class MainActivity extends AppCompatActivity implements
 
     private void showIndeterminateProgressDialog(boolean horizontal) {
         new MaterialDialog.Builder(this)
-                .title(R.string.progress_dialog)
-                .content(R.string.please_wait)
-                .progress(true, 0)
-                .progressIndeterminateStyle(horizontal)
-                .show();
+            .title(R.string.progress_dialog)
+            .content(R.string.please_wait)
+            .progress(true, 0)
+            .progressIndeterminateStyle(horizontal)
+            .show();
     }
 
     @OnClick(R.id.preference_dialogs)
     public void showPreferenceDialogs() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1)
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1) {
             startActivity(new Intent(getApplicationContext(), PreferenceActivity.class));
-        else
+        } else {
             startActivity(new Intent(getApplicationContext(), PreferenceActivityCompat.class));
+        }
     }
 
     @Override
@@ -762,7 +799,8 @@ public class MainActivity extends AppCompatActivity implements
                     }
                 }, 1000);
             } else {
-                Toast.makeText(this, "The folder or file chooser will not work without permission to read external storage.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "The folder or file chooser will not work without permission to read external storage.",
+                    Toast.LENGTH_LONG).show();
             }
         }
     }
